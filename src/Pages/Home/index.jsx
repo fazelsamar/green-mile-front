@@ -1,10 +1,13 @@
 import React, {Component} from "react";
-import Layout from "../../Layout/Layout";
-
+import {Route, Switch} from 'react-router-dom'
 class Home extends Component {
   render() {
-    return <Layout></Layout>;
-  }
-}
+    return (
+      <div> 
+        
+      </div>
 
+    )
+}
+}
 export default Home;
