@@ -1,19 +1,20 @@
-import React, { Component } from 'react'
-
-
+import React, {Component} from "react";
+import {FormLogin, FormLoginDiv, InputsType, InputSubmit} from "./LoginElem";
 
 class Login extends Component {
-
-    state = {  }
-    render() { 
-        return ( 
-            <form onSubmit={3}>
-                <input type="text" value="نام کاربری " />
-                <input type="password" value='رمز عبور' />
-                <input type="submit" value="ورود" />
-            </form>
-         );
-    }
+  state = {};
+  render() {
+    return (
+      <FormLoginDiv>
+        <h3>ورود</h3>
+        <FormLogin>
+        <InputsType type='text' placeholder="نام کاربری :" />
+        <InputsType type='password' placeholder="کلمه عبور :" />
+        <InputSubmit type='submit' value='ورود' />
+        </FormLogin>
+      </FormLoginDiv>
+    );
+  }
 }
- 
+
 export default Login;

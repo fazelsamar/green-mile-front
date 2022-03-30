@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <Router>
         <Layout>
-        <Login/>
+         <Login/>
         </Layout>;
       </Router>
     );
