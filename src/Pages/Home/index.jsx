@@ -1,8 +1,77 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { DivStates, StatesPr } from "./HomePageElements";
+
 class Home extends Component {
+  state={
+    states: ["یزد", "تهران", "مشهد", "هرزمگان", "مازندران", "شیراز"],
+
+  }
   render() {
-    return <div>Home</div>;
+  
+
+    return (<DivStates>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      <StatesPr>
+      yazd
+      </StatesPr>
+      </DivStates>)
+
   }
 }
 export default Home;

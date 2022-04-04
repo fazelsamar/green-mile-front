@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, {Component} from "react";
+import { Navigate } from "react-router-dom";
 import {FormLogin, FormLoginDiv, InputsType, InputSubmit} from "./LoginElem";
 
 class Login extends Component {
@@ -15,13 +16,23 @@ class Login extends Component {
     this.setState(data);
   };
   submitForm = (e) => {
-    e.preventDefault()
-     axios.post("http://127.0.0.1:8000/v1/account/login/",{username: this.state.username,password: this.state.password}).then(resp=>{
-       console.log(resp);
-     });
+    console.log(e )
+    e.preventDefault();
+    axios
+      .post("http://127.0.0.1:8000/v1/account/login/", {
+        username: this.state.username,
+        password: this.state.password,
+      })
+      .then((resp) => {
+        localStorage.setItem('token',resp.data.token)
+
+      });
   };
   render() {
+    const {hasLogin} = this.props
     return (
+      <>
+      {hasLogin ? <Navigate replace to= '/' /> :   
       <FormLoginDiv>
         <FormLogin onSubmit={this.submitForm}>
           <InputsType
@@ -40,7 +51,9 @@ class Login extends Component {
           <InputSubmit value="ورود" type="submit" />
         </FormLogin>
       </FormLoginDiv>
-    );
+    }
+      </>
+      );
   }
 }
 
