@@ -1,77 +1,29 @@
 import React, { Component } from "react";
-import { DivStates, StatesPr } from "./HomePageElements";
+import { DivStates, StatesLink, StatesPr } from "./HomePageElements";
 
 class Home extends Component {
-  state={
-    states: ["یزد", "تهران", "مشهد", "هرزمگان", "مازندران", "شیراز"],
-
-  }
+ 
   render() {
   
 
-    return (<DivStates>
-      <StatesPr>
-      yazd
+    return (
+    <>
+    <h2 style={{textAlign:'center'}}> استان مورد نظر را انتخاب کنید </h2>
+      <DivStates>
+      
+      {this.props.states.map(states=>{
+return(
+        <StatesPr>
+        <StatesLink to ="/posts">
+        {states}
+        </StatesLink>
       </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      <StatesPr>
-      yazd
-      </StatesPr>
-      </DivStates>)
-
+      )
+      })}
+      
+     
+      </DivStates>
+      </>)
+    }
   }
-}
 export default Home;

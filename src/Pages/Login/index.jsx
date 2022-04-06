@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, {Component} from "react";
-import { Navigate } from "react-router-dom";
-import {FormLogin, FormLoginDiv, InputsType, InputSubmit} from "./LoginElem";
+import { Link, Navigate } from "react-router-dom";
+import {FormLogin, FormLoginDiv, InputsType, InputSubmit, Register} from "./LoginElem";
 
 class Login extends Component {
   state = {
@@ -34,6 +34,9 @@ class Login extends Component {
       <>
       {hasLogin ? <Navigate replace to= '/' /> :   
       <FormLoginDiv>
+      <h2>
+          ورود
+      </h2>
         <FormLogin onSubmit={this.submitForm}>
           <InputsType
             value={this.state.username}
@@ -50,6 +53,12 @@ class Login extends Component {
           />
           <InputSubmit value="ورود" type="submit" />
         </FormLogin>
+        <p>
+            ثبت نام نکرده اید؟ 
+        </p>
+        <Register to='/register'>
+          ثبت نام
+        </Register>
       </FormLoginDiv>
     }
       </>

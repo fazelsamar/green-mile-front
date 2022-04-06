@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Profile from "../Profile";
+import NormalHeader from "./Header-item/NormalHeader";
 import {
   AddCocitionDiv,
   BoxItemMenus,
@@ -17,6 +17,7 @@ import {
   UserDiv,
   ItemMenu,
 } from "./HeaderElements";
+import MobileMenu from "./MobileMenu/MobileMenu";
 
 class Header extends Component {
      
@@ -33,42 +34,12 @@ class Header extends Component {
   render() {
     return (
       <HeaderElm>
-        <MobileMneu toggelMenu={this.state.toggelMenu}>
-          <CloseMenu onClick={this.toggelMenuFun}  />
-          <SearchMobile>
-            <SearchInput placeholder="جستجو ...." />
-            <IconSearch />
-          </SearchMobile> 
-          <BoxItemMenus>
-            <ItemMenu to=""> اضافه کردن مکان </ItemMenu>
-          </BoxItemMenus>
-          <BoxItemMenus>
-            <ItemMenu to=""> لیست استان ها </ItemMenu>
-          </BoxItemMenus>
-          <BoxItemMenus>
-            <ItemMenu to=""> درباره ما </ItemMenu>
-          </BoxItemMenus>
-        </MobileMneu>
+        <MobileMenu  toggelMenuFun= {this.toggelMenuFun} toggel = {this.state.toggelMenu} />
 
-        <Headerdiv>
-          <UserDiv>
-            <Profile />
-            <BtnLinkHeader to="">{this.state.username}</BtnLinkHeader>
-          </UserDiv>
+        
+        <NormalHeader hasLogin={this.props.hasLogin} clickMenu ={this.toggelMenuFun} username={this.state.username} />
+        </HeaderElm>
 
-          <SearchBox>
-            <SearchInput placeholder="جستجو ...." />
-            <IconSearch />
-          </SearchBox>
-
-          <AddCocitionDiv>
-            <BtnLinkHeader to=""> اضافه کردن مکان </BtnLinkHeader>
-          </AddCocitionDiv>
-          <IconMenuMobilePr onClick={this.toggelMenuFun} >
-            <IconMenuMobile />
-          </IconMenuMobilePr>
-        </Headerdiv>
-      </HeaderElm>
     );
   }
 }

@@ -1,5 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import {
+  AddCommnet,
   Commnet,
   CommnetProfileDiv,
   CommnetProfileImg,
@@ -15,6 +16,10 @@ import {
   DivWelfareItem,
   DivWelfareItemImg,
   DivWelfareItemTitle,
+  FromCommetDiv,
+  FromCommetdivSubmit,
+  FromCommetInput,
+  FromCommetSubmit,
   ImagePost,
   ImagePostDiv,
   InfoDiv,
@@ -27,12 +32,12 @@ import {
   UserName,
 } from "./PostElement";
 import Image from "./../../images/189967449-talab-ir.jpg";
-import {AiOutlineHeart} from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 
 class Post extends Component {
   state = {};
   render() {
-    const {post} = this.props;
+    const { post } = this.props;
     return (
       <ParentPost>
         <DivLikeAndImage>
@@ -102,24 +107,33 @@ class Post extends Component {
             return (
               <Commnet>
                 <CommnetProfileDiv>
-                  <CommnetProfileImg src= {Image} />
+                  <CommnetProfileImg src={Image} />
                 </CommnetProfileDiv>
-               <CommnetUser>
-               <UserName> 
-                {commnet.user} :
-               </UserName>
-               <TextCommnet>
-               {commnet.commnet}
-               
-               </TextCommnet>
-               </CommnetUser>
-
+                <CommnetUser>
+                  <UserName>
+                    {commnet.user} :
+                  </UserName>
+                  <TextCommnet>
+                    {commnet.commnet}
+                  </TextCommnet>
+                </CommnetUser>
               </Commnet>
             );
           })}
         </Commnets>
+        <AddCommnet>
+        <div>
+          <label> ثبت نظر : </label>
+        </div>
+        <FromCommetDiv>
 
-          
+        <FromCommetInput></FromCommetInput>
+        <FromCommetdivSubmit>
+        <FromCommetSubmit type='submit' value='ثبت' / >
+        </FromCommetdivSubmit>
+        </FromCommetDiv>
+        </AddCommnet>
+
       </ParentPost>
     );
   }

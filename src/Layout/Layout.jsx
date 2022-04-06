@@ -6,9 +6,10 @@ import {Body, HtmlTag} from "./LayoutElement";
 class Layout extends Component {
   state = {};
   render() {
+    console.log(this.props.hasLogin);
     return (
       <HtmlTag>
-        <Header />
+        <Header hasLogin= {this.props.hasLogin} />
 
         <Body>{this.props.children}</Body>
 

@@ -1,14 +1,14 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const FormLoginDiv = styled.div`
   width: 40%;
   margin: 50px auto;
-  border: 1px solid gray;
-  min-height: 100px;
+  min-height: 300px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 5px 0px grey;
   @media screen and (max-width: 500px){
   width: 70%;
   box-shadow: 0;
@@ -53,4 +53,11 @@ export const InputSubmit = styled.input`
 
     border: 1px solid #02AB8A ;
     }
+`
+
+export const Register = styled(Link)`
+
+    text-decoration: none;
+    
+
 `

@@ -19,7 +19,11 @@ export const ImagePost = styled.img`
 `;
 export const DivLikeAndImage = styled.div`
   margin: auto;
-  width: 50%;
+  width: 60%;
+  @media screen and (max-width: 500px) {
+  width: 80%;
+    
+  }
 `;
 export const LikeBtnParent = styled.div`
   width: 70px;
@@ -93,6 +97,10 @@ export const DivWelfare = styled.div`
   align-items: center;
   justify-content: space-evenly;
   padding: 50px 20px;
+  @media screen and (max-width:500px) {
+  flex-direction: column;
+    
+  }
 `;
 
 export const DivWelfareItem = styled.div`
@@ -101,6 +109,11 @@ export const DivWelfareItem = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  @media screen and (max-width:500px) {
+    width: 50%;
+
+    
+  }
 `;
 
 export const DivWelfareItemImg = styled.div`
@@ -126,6 +139,12 @@ export const DivMap = styled.div`
   height: 300px;
   align-items: center;
   padding: 50px 20px;
+  @media screen and (max-width:500px) {
+  padding: 50px 0;
+
+  width: 80%;
+    
+  }
 `;
 export const MapElement = styled.div`
   background-color: gray;
@@ -147,9 +166,8 @@ export const Commnets = styled.div`
 
 `
 export const Commnet = styled.div`
-  margin: 30px ;
-  width: 30%;
-  border-bottom: 1px solid gray;
+  margin: 10px ;
+  width: 100%;
   display: flex;
   align-items: center;
 `
@@ -169,6 +187,7 @@ export const CommnetProfileImg = styled.img`
 
 export const CommnetUser = styled.div`
 padding:0 20px;
+width: 70%;
 `
 
 export const UserName = styled.p`
@@ -181,3 +200,44 @@ export const TextCommnet = styled.p`
   padding: 0 5px;
   font-size: 15px;
 ` 
+export const AddCommnet = styled.div`
+
+  width: 100%;
+  padding: 50px 20px;
+
+
+`
+export const FromCommetDiv = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+
+`
+export const FromCommetInput = styled.textarea`
+  width: 40%;
+  height: 200px;
+  outline: 0;
+  border: 1px solid gray;
+  @media screen and (max-width:500px) {
+      width: 85%;
+  }
+`
+export const FromCommetdivSubmit = styled.div`
+padding: 20px 0;
+
+`
+export const FromCommetSubmit = styled.input`
+width: 60px;
+outline: 0;
+  border: 1px solid #02ab8a;
+  background-color: #02ab8a ;
+  border-radius: 3px;
+  color: #fff;
+  transition: all 0.3s ease;
+  &:hover {
+    color: #02ab8a;
+    background-color: #fff;
+  }
+`
+

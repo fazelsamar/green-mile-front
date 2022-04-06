@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import {BiSearch, BiMenuAltLeft} from "react-icons/bi";
-import {IoIosClose} from "react-icons/io";
+import { BiSearch, BiMenuAltLeft } from "react-icons/bi";
+import { IoIosClose } from "react-icons/io";
 // create section Header
 export const HeaderElm = styled.header`
   height: 50px;
@@ -25,14 +25,30 @@ export const Headerdiv = styled.div`
 // user info
 export const UserDiv = styled.div`
   display: flex;
-  min-width: 10.33333%;
+  min-width: 12.33333%;
   border: 0.5px solid gray;
   justify-content: space-between;
   border-radius: 3px;
   vertical-align: middle;
   align-items: center;
 `;
+export const UserLoginDiv = styled(Link)`
+  display: flex;
+  min-width: 12.33333%;
+  text-decoration: none;
+  border: 0.5px solid gray;
+  justify-content: center;
+  padding: 3px;
+  border-radius: 3px;
+  align-items: center;
+  transition: 0.4s;
+  color:#505052 ;
 
+  &:hover {
+    background-color: #505052;
+    color: #fff;
+  }
+`;
 // btn link
 
 export const BtnLinkHeader = styled(Link)`
@@ -109,8 +125,8 @@ export const MobileMneu = styled.div`
   width: 50%;
   height: 100%;
   transition: all 0.3s ease;
-  opacity:${({toggelMenu})=>(toggelMenu ? '1' : '0' )} ;
-  right: ${({toggelMenu})=>(toggelMenu ? '50%' : '100%' )} 
+  opacity:${({ toggelMenu }) => (toggelMenu ? '1' : '0')} ;
+  right: ${({ toggelMenu }) => (toggelMenu ? '50%' : '100%')} 
   ;
 `;
 
@@ -159,3 +175,4 @@ export const ItemMenu = styled(Link)`
     color: #505052;
   }
 `;
+
