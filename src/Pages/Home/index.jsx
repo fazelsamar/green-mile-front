@@ -14,8 +14,8 @@ class Home extends Component {
       {this.props.states.map(states=>{
 return(
         <StatesPr>
-        <StatesLink to ="/posts">
-        {states}
+        <StatesLink value = {states.provinceName} to ="/posts">
+        {states.provinceName}
         </StatesLink>
       </StatesPr>
       )

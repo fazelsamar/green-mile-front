@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BackHome from '../../Components/Back-home';
 import Inputs from './Inputs/Inputs';
 import { DivFormInput, DivFormRegister, DivParentRegister, FormInput, FormRegister, LableForm, Submit } from './RegisterElement';
 
@@ -33,6 +34,7 @@ class Register extends Component {
         return (
 
             <DivParentRegister>
+            <BackHome />
                 <h2>ثبت نام :</h2>
                 <DivFormRegister>
                     <FormRegister onSubmit={this.formSubmit}>
