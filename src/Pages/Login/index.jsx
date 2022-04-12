@@ -1,69 +1,93 @@
-import axios from "axios";
-import React, {Component} from "react";
-import { Link, Navigate } from "react-router-dom";
-import {FormLogin, FormLoginDiv, InputsType, InputSubmit, Register} from "./LoginElem";
+import React, { useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import BackHome from "../../Components/Back-home";
+import Inputs from "../register/Inputs/Inputs";
+import {
+  DivFormInput,
+  DivFormRegister,
+  DivParentRegister,
+  FormInput,
+  FormRegister,
+  LableForm,
+  Submit,
+} from "../register/RegisterElement";
 
-class Login extends Component {
-  state = {
-    username: "",
-    password: "",
-  };
-  handelInput = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    let data = {};
-    data[name] = value;
-    this.setState(data);
-  };
-  submitForm = (e) => {
-    console.log(e )
-    e.preventDefault();
-    axios
-      .post("http://127.0.0.1:8000/v1/account/login/", {
-        username: this.state.username,
-        password: this.state.password,
+const Login = () => {
+  let navigate = useNavigate();
+  const [user, setUser] = useState({});
+
+  const doSubmit = async () => {
+    const formData = new FormData();
+    for (var key in user) {
+      formData.append(key, user[key]);
+    }
+    fetch(`${process.env.REACT_APP_URL_API}/v1/account/login/`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (response.status == 200) {
+          alert("ورود موفقیت آمیز بود");
+          // navigate("/login");
+          return response.json();
+        }
+        if (response.status == 401) {
+          alert("یافت نشد");
+        }
       })
-      .then((resp) => {
-        localStorage.setItem('token',resp.data.token)
-
+      .then((data) => {
+        if (data) {
+          window.localStorage.setItem("token", data["token"]);
+          window.localStorage.setItem("first_name", data["first_name"]);
+          window.localStorage.setItem("last_name", data["last_name"]);
+          window.localStorage.setItem("phone_number", data["phone_number"]);
+          window.localStorage.setItem("profile_pic", data["profile_pic"]);
+          navigate("/");
+        }
       });
   };
-  render() {
-    const {hasLogin} = this.props
-    return (
-      <>
-      {hasLogin ? <Navigate replace to= '/' /> :   
-      <FormLoginDiv>
-      <h2>
-          ورود
-      </h2>
-        <FormLogin onSubmit={this.submitForm}>
-          <InputsType
-            value={this.state.username}
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    doSubmit();
+  };
+
+  const handleChange = ({ currentTarget: input }) => {
+    user[input.name] = input.value;
+    setUser(user);
+  };
+
+  return (
+    <DivParentRegister>
+      <BackHome />
+      <h2>ورود :</h2>
+      <DivFormRegister>
+        <FormRegister onSubmit={handleSubmit}>
+          <Inputs
+            type="text"
+            required
+            value={user.username}
+            change={handleChange}
             name="username"
-            onChange={this.handelInput}
-            placeholder="نام کاربری :"
+            lable="نام کاربری"
           />
-          <InputsType
-            value={this.state.password}
+
+          <Inputs
+            type="text"
+            required
+            value={user.password}
+            change={handleChange}
             name="password"
-            onChange={this.handelInput}
-            placeholder="کلمه عبور  :"
-            type="password"
+            lable="رمز عبور"
           />
-          <InputSubmit value="ورود" type="submit" />
-        </FormLogin>
-        <p>
-            ثبت نام نکرده اید؟ 
-        </p>
-        <Register to='/register'>
-          ثبت نام
-        </Register>
-      </FormLoginDiv>
-    }
-      </>
-      );
-  }
-}
+
+          <DivFormInput>
+            <Submit type="submit" value="ورود" />
+          </DivFormInput>
+        </FormRegister>
+      </DivFormRegister>
+    </DivParentRegister>
+  );
+};
 
 export default Login;

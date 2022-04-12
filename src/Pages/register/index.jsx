@@ -1,58 +1,117 @@
-import React, { Component } from 'react'
-import BackHome from '../../Components/Back-home';
-import Inputs from './Inputs/Inputs';
-import { DivFormInput, DivFormRegister, DivParentRegister, FormInput, FormRegister, LableForm, Submit } from './RegisterElement';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import BackHome from "../../Components/Back-home";
+import Inputs from "./Inputs/Inputs";
+import {
+  DivFormInput,
+  DivFormRegister,
+  DivParentRegister,
+  FormInput,
+  FormRegister,
+  LableForm,
+  Submit,
+} from "./RegisterElement";
 
+const Register = () => {
+  let navigate = useNavigate();
+  const [user, setUser] = useState({});
 
-
-class Register extends Component {
-    state = {
-        firstName: '',
-        lastName: '',
-        numberPhone: '',
-        username: '',
-        profile: '',
+  const doSubmit = async () => {
+    const formData = new FormData();
+    for (var key in user) {
+      formData.append(key, user[key]);
     }
-    changeValue = (e) => {
-        let name = e.target.name;
-        let value = e.target.value;
-        let data = {};
-        data[name] = value;
-        this.setState(data);
-    }
-    formSubmit =(e)=>{
-        e.preventDefault()
-        let dataForm = new FormData()
-        dataForm.append('firstName',this.state.firstName) 
-        dataForm.append('lastName',this.state.lastName) 
-        dataForm.append('numberPhone',this.state.numberPhone) 
-        dataForm.append('username',this.state.username) 
-        dataForm.append('profile',this.state.profile)
-        console.log(dataForm); 
-    }
-    render() {
-        return (
+    fetch(`${process.env.REACT_APP_URL_API}/v1/account/register/`, {
+      method: "POST",
+      body: formData,
+    }).then((response) => {
+      if (response.status == 201) {
+        alert("ثبت نام موفقیت آمیز بود");
+        navigate("/login");
+      }
+      if (response.status == 400) {
+        alert("یوزری با این نام کاربری از قبل وجود دارد");
+      }
+    });
+  };
 
-            <DivParentRegister>
-            <BackHome />
-                <h2>ثبت نام :</h2>
-                <DivFormRegister>
-                    <FormRegister onSubmit={this.formSubmit}>
-                        <Inputs type='text' change={this.changeValue} value={this.state.firstName} name='firstName' lable='نام' />
-                        <Inputs type='text' change={this.changeValue} value={this.state.lastName} name='lastName' lable='نام خانوادگی' />
-                        <Inputs type='number' change={this.changeValue} value={this.state.numberPhone} name='numberPhone' lable='شماره ' />
-                        <Inputs type='text' change={this.changeValue} value={this.state.username} name='username' lable='نام کاربری' />
-                        <Inputs type='file' change={this.changeValue} value={this.state.profile} name='profile' lable='تصویر پروفایل ' />
-                        <DivFormInput>
-                            <Submit type='submit' value='ثبت نام' />
-                        </DivFormInput>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    doSubmit();
+  };
 
-                    </FormRegister>
-                </DivFormRegister>
-            </DivParentRegister>
+  const handleChange = ({ currentTarget: input }) => {
+    user[input.name] = input.value;
+    setUser(user);
+  };
 
-        );
-    }
-}
+  const handleImgChange = (e) => {
+    user[e.target.name] = e.target.files[0];
+    setUser(user);
+  };
+
+  return (
+    <DivParentRegister>
+      <BackHome />
+      <h2>ثبت نام :</h2>
+      <DivFormRegister>
+        <FormRegister onSubmit={handleSubmit}>
+          <Inputs
+            type="text"
+            required
+            value={user.first_name}
+            change={handleChange}
+            name="first_name"
+            lable="نام"
+          />
+          <Inputs
+            type="text"
+            required
+            value={user.last_name}
+            change={handleChange}
+            name="last_name"
+            lable="نام خانوادگی"
+          />
+          <Inputs
+            type="number"
+            required
+            value={user.phone_number}
+            change={handleChange}
+            name="phone_number"
+            lable="شماره "
+          />
+          <Inputs
+            type="text"
+            required
+            value={user.username}
+            change={handleChange}
+            name="username"
+            lable="نام کاربری"
+          />
+          <Inputs
+            type="password"
+            required
+            value={user.password}
+            change={handleChange}
+            name="password"
+            lable="رمز عبور"
+          />
+          <Inputs
+            type="file"
+            accept="image/*"
+            required
+            value={user.profile_pic}
+            change={handleImgChange}
+            name="profile_pic"
+            lable="تصویر پروفایل "
+          />
+          <DivFormInput>
+            <Submit type="submit" value="ثبت نام" />
+          </DivFormInput>
+        </FormRegister>
+      </DivFormRegister>
+    </DivParentRegister>
+  );
+};
 
 export default Register;
