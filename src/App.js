@@ -22,6 +22,7 @@ class App extends Component {
 
   state = {
     login: true,
+    searchedPost :[],
     post: '',
     states:'',
 
@@ -34,6 +35,12 @@ class App extends Component {
       this.setState({ posts: resps })
     })
   }
+  searched = (item)=>{
+    fetch(`${process.env.REACT_APP_URL_API}/v1/posts/?search=${item}`).then(resp => resp.json()).then(
+            resps => {
+             this.setState({searchedPost:resps})
+            })
+  }
 
   render() {
     return (
@@ -45,7 +52,7 @@ class App extends Component {
             <Route path="/post/:id" element={<Post getPost={this.setPost} post={this.state.post} />} />
             <Route path="/posts/:name" element={<Posts setPosts={this.setPosts} posts={this.state.posts} />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/search/:value" element={<SearchData />} />
+            <Route path="/search/:value" element={<SearchData posts={this.searchedPost}  searched={this.searched} />} />
             <Route
               path="/addlocition"
               element={

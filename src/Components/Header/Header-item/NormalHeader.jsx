@@ -10,7 +10,7 @@ class NormalHeader extends Component {
       valueInput:''
       } 
       reloadPage=()=>{
-        this.setState({locition:true})
+        window.location.replace(`/search/${this.state.valueInput}`)
       }
       setValue=(e)=>{
         this.setState({valueInput:e.target.value})
@@ -31,7 +31,7 @@ class NormalHeader extends Component {
             <SearchBox>
               <SearchInput value={this.state.valueInput} onChange={this.setValue} placeholder="جستجو ...." />
               <DivIcnon>
-        {this.state.locition ? <Navigate replace to={`/search/${this.state.valueInput}`} />: null }    
+            
               <IconSearch  onClick={this.reloadPage} />
               </DivIcnon>
               </SearchBox>

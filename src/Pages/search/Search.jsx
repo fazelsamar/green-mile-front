@@ -8,9 +8,9 @@ const SearchData = (props) => {
     const [value, setvalue] = useState(useParams());
     const [posts, setPosts] = useState([]);
     useEffect(() => {
-        let post  ;
         async function fechApi (){
-            if(!post){
+            let post  ;
+            if(posts.length===0){
         await fetch(`${process.env.REACT_APP_URL_API}/v1/posts/?search=${value.value}`).then(resp => resp.json()).then(
             resps => {
                 post = resps
@@ -18,10 +18,10 @@ const SearchData = (props) => {
             setPosts(post)
         }
     }
-        fechApi()
-
-    }, []);
     console.log(posts)
+
+    fechApi()
+    }, []);
     return (
         <>
         <h2 style={{textAlign:'center'}}> مکان مورد نظر خود را انتخاب کنید </h2>

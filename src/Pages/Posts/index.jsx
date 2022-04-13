@@ -6,7 +6,8 @@ import { useParams } from "react-router-dom";
 const Posts =(props)=> {
  const [state, setState] = useState(useParams().name);
           useEffect(  ()  => {
-  
+              
+            
             props.setPosts(state)
 
             
