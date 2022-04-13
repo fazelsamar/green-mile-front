@@ -118,27 +118,29 @@ class AddLocition extends Component {
     }).then(  resp=>  resp.json()).then( respe=>{
       console.log(respe)
        idPost = respe.id
-    })
-    
-     this.state.welfareAmenities.map(async item=>{
-     let newForm = new FormData()
-      console.log(item);
-     newForm.append('image',item.sendPhtotoW)
-     newForm.append('title',item.title)
-      await fetch(`${process.env.REACT_APP_URL_API}/v1/post/${idPost}/new-welfare-place/`,{
-        method:'post',
-        headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`
-        },
-        body:newForm
-      }).then(resp=>{resp.json()}).then(res=>{
-        console.log(res)
       })
-    })
-
-    this.setState(stateone)
-
-    alert('با موفقیت انجام شد')
+      
+      
+      this.state.welfareAmenities.map(async item=>{
+        let newForm = new FormData()
+        console.log(item);
+        newForm.append('image',item.sendPhtotoW)
+        newForm.append('title',item.title)
+        await fetch(`${process.env.REACT_APP_URL_API}/v1/post/${idPost}/new-welfare-place/`,{
+          method:'post',
+          headers: {
+            Authorization: `Token ${localStorage.getItem('token')}`
+          },
+          body:newForm
+        }).then(resp=>{resp.json()}).then(res=>{
+          console.log(res)
+        })
+      })
+      
+      this.setState(stateone)
+      
+      alert('با موفقیت انجام شد')
+      window.location.replace(`/post/${idPost}`);
   }
   handelAddMapPage = () => {
     this.setState({ openPageAddMap: !this.state.openPageAddMap })

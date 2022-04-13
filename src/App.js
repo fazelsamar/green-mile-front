@@ -8,6 +8,7 @@ import Login from "./Pages/Login";
 import Post from "./Pages/Posts/Post";
 import Posts from "./Pages/Posts";
 import Register from "./Pages/register";
+  import SearchData from "./Pages/search/Search";
 
 class App extends Component {
   async componentDidMount() {
@@ -41,9 +42,10 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<Home states={this.state.states} />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/post/:state/:id" element={<Post getPost={this.setPost} post={this.state.post} />} />
+            <Route path="/post/:id" element={<Post getPost={this.setPost} post={this.state.post} />} />
             <Route path="/posts/:name" element={<Posts setPosts={this.setPosts} posts={this.state.posts} />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/search/:value" element={<SearchData />} />
             <Route
               path="/addlocition"
               element={

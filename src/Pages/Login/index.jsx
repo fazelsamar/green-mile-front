@@ -42,7 +42,7 @@ const Login = () => {
           window.localStorage.setItem("last_name", data["last_name"]);
           window.localStorage.setItem("phone_number", data["phone_number"]);
           window.localStorage.setItem("profile_pic", data["profile_pic"]);
-               window.location.replace("/");
+          window.location.replace("/");
 
         }
       });

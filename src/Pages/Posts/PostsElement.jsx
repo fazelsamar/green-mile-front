@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-export const ParentElement = styled.div
+export const ParentElementPosts = styled.div
 `   
     max-width:900px;
     width: 100%;

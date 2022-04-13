@@ -32,8 +32,10 @@ import {
   TextCommnet,
   UserName,
 } from "./PostElement";
-
-import Image from "./../../../images/189967449-talab-ir.jpg";
+import {
+ 
+  Navigate,
+} from 'react-router-dom';
 import { AiOutlineHeart } from "react-icons/ai";
 import ShowMap from "../../../Components/ShowMap";
 import { useParams } from "react-router-dom";
@@ -44,6 +46,7 @@ const Post= (props)=> {
     const [state, setstate] = useState(useParams());
     const [valueCommnet, setValueCommnet] = useState('');
     const [locition, setLocition] = useState();
+    const [hasNav, setNav] = useState(false);
     
     
     
@@ -54,17 +57,15 @@ const Post= (props)=> {
       console.log('first')
       const setPosta = async () => {
         let goPost;
-        await fetch(`${process.env.REACT_APP_URL_API}/v1/posts/?province__title=${state.state}`).then(resp => {
+        await fetch(`${process.env.REACT_APP_URL_API}/v1/post/${state.id}/`).then(resp => {
             return resp.json()
         }).then(resps => {
-            goPost = resps.filter(item => {
-                return item.id === Number(state.id)
-            })
-            console.log(goPost);
-            const getlocition = goPost[0].location.split(',')
+            goPost = resps
+            console.log(resps);
+            const getlocition = goPost.location.split(',')
             console.log(getlocition)
             setLocition(getlocition)
-            setPost(goPost[0])
+            setPost(goPost)
         })
     }
     setPosta()
@@ -72,6 +73,7 @@ const Post= (props)=> {
     const formHandel = async (e)=>{
      
       e.preventDefault()
+      if(localStorage.getItem('token')){
       let newForm=  new FormData()
       newForm.append('body',valueCommnet)
       
@@ -91,20 +93,52 @@ const Post= (props)=> {
       setPost(copyPost)
       setValueCommnet('')
       console.log(resp);
-      window.location.replace("/");
+      setNav(true )
 
       })
+    }else{
+      alert('لطفا وارد حساب کاربری خود شوید')
+    }
+    }
+    const handelLike =()=>{
+      if(localStorage.getItem('token')){
+      fetch(`${process.env.REACT_APP_URL_API}/v1/post/${post.id}/like/`,{
+             headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`
+        },
+      }).then(resp=>resp.json()).then(resp=>{
+        let copyState ={...post}
+        if(resp.msg ==='Liked'){
+        copyState.does_user_likes = true
+        copyState.likes =Number(copyState.likes)+1 
+        setPost(copyState) 
+      }else if('Unliked'){
+        copyState.does_user_likes = false
+        copyState.likes =Number(copyState.likes)-1 
+        setPost(copyState) 
+        console.log(resp);
+
+      }
+      
+      })
+    }
+    else{
+      alert('لطفا وارد  حساب کاربری خود شوید')
+    }
+      
     }
     return (
       <>
+      {hasNav  ?<Navigate replace to={`/`} />  :
+        <>
       {post ? 
       <ParentPost>
       <DivLikeAndImage>
           <ImagePostDiv>
-            <ImagePost src={Image} />
+            <ImagePost src={post.image} />
           </ImagePostDiv>
           <LikeBtnParent>
-            <LikeBtn>
+            <LikeBtn onClick={handelLike}>
               <span>{post.likes}</span>
               <AiOutlineHeart />
             </LikeBtn>
@@ -155,7 +189,10 @@ const Post= (props)=> {
             return (
               <DivWelfareItem>
                 <DivWelfareItemTitle><ImgWelf src={welfare.image} /></DivWelfareItemTitle>
-              </DivWelfareItem>
+                <p style={{fontWeight:'bold'}}>
+                {welfare.title}
+                </p>
+                  </DivWelfareItem>
             );
           }):null}
         </DivWelfare>
@@ -195,6 +232,8 @@ const Post= (props)=> {
         </AddCommnet>
         </ParentPost>
         : null }
+        </>
+      }
         </>
     );
 }

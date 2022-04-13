@@ -86,7 +86,7 @@ export const AddCocitionDiv = styled.div`
 export const SearchBox = styled.div`
   width: 33.33333333%;
   height: 12px;
-  padding: 12px 16px;
+  padding: 12px 0;
   border-radius: 3px;
   border: 1px solid gray;
   display: flex;
@@ -97,15 +97,28 @@ export const SearchBox = styled.div`
 `;
 // input search
 export const SearchInput = styled.input`
-  width: 95%;
+  width: 100%;
   border: 0;
   outline: 0;
+  margin: 0 12px ;
   font-weight: bold;
 `;
 // icon search
+export const DivIcnon = styled.div`
+display: flex;
 
+align-items: center;
+width: 15%;
+
+height: 100%;
+background-color: gray;
+padding: 12px 2px;
+    justify-content: center;
+`
 export const IconSearch = styled(BiSearch)`
+  
   font-size: 20px;
+  color: #fff;
 `;
 // mubile menu
 export const IconMenuMobilePr = styled.div`

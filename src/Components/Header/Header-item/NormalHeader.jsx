@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
+import { Navigate } from 'react-router-dom';
 import Profile from '../../Profile';
-import { AddCocitionDiv, BtnLinkHeader, Headerdiv, IconMenuMobile, IconMenuMobilePr, IconSearch, SearchBox, SearchInput, UserDiv, UserLoginDiv } from '../HeaderElements';
+import { AddCocitionDiv, BtnLinkHeader, DivIcnon, Headerdiv, IconMenuMobile, IconMenuMobilePr, IconSearch, SearchBox, SearchInput, UserDiv, UserLoginDiv } from '../HeaderElements';
 
 
 class NormalHeader extends Component {
-    state = {  } 
+    state = {
+      locition:false,
+      valueInput:''
+      } 
+      reloadPage=()=>{
+        this.setState({locition:true})
+      }
+      setValue=(e)=>{
+        this.setState({valueInput:e.target.value})
+      }
     render() { 
       
         return (
-            <Headerdiv>
+            
+          <Headerdiv>
                 {localStorage.getItem("token") ?<UserDiv>
                     <Profile />
                     <BtnLinkHeader to="">{localStorage.getItem("last_name")}</BtnLinkHeader>
@@ -16,11 +27,14 @@ class NormalHeader extends Component {
                     ورود
                   </UserLoginDiv> }
             
-  
+          
             <SearchBox>
-              <SearchInput placeholder="جستجو ...." />
-              <IconSearch />
-            </SearchBox>
+              <SearchInput value={this.state.valueInput} onChange={this.setValue} placeholder="جستجو ...." />
+              <DivIcnon>
+        {this.state.locition ? <Navigate replace to={`/search/${this.state.valueInput}`} />: null }    
+              <IconSearch  onClick={this.reloadPage} />
+              </DivIcnon>
+              </SearchBox>
   
             <AddCocitionDiv>
               <BtnLinkHeader  to="/addLocition"> اضافه کردن مکان </BtnLinkHeader>

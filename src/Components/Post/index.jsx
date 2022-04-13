@@ -28,7 +28,7 @@ class Post extends Component {
                             <ItemQ> استان:  </ItemQ>
                             <ItemR>  {post.province} </ItemR>
                         </DivItemInfo>
-                        <LinkPostDiv > <LinkPost postInfo={post} to={`/post/${post.province}/${post.id}`} > بیشتر </LinkPost></LinkPostDiv>
+                        <LinkPostDiv > <LinkPost postInfo={post} to={`/post/${post.id}`} > بیشتر </LinkPost></LinkPostDiv>
                     </PostInfoMore>
                 </PostInfo>
 
