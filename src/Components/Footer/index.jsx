@@ -15,7 +15,7 @@ class Footer extends Component {
           <DivInfoChilds>
             <HeaderItemFooter>تماس با ما :</HeaderItemFooter>
 
-            <ItemFooterInfo>مهرداد خندان : 0930</ItemFooterInfo>
+            <ItemFooterInfo>مهرداد خندان : 09308178083</ItemFooterInfo>
             <ItemFooterInfo>فاضل : 00000</ItemFooterInfo>
           </DivInfoChilds>
           <DivInfoChilds>
@@ -24,7 +24,6 @@ class Footer extends Component {
                                     این اپ به منظور به نمایش گذاشتن ایران زیبای ماست . شما هم میتوانید عکس و مکان های مورد نظر خود را با ما به اشتراک بگذارید.
             </ItemFooterInfo>
           </DivInfoChilds>
-          <DivInfoChilds> Icons  </DivInfoChilds>
         </DivInfo>
       </FooterElement>
     );
