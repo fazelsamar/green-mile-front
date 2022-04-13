@@ -55,8 +55,8 @@ const stateone = {
   locition: '',
   welfareAmenities: [],
   sleep: false,
-  infoAddMap: {}
-
+  infoAddMap: {},
+  states : []
 };
 class AddLocition extends Component {
   state = stateone
@@ -65,6 +65,12 @@ class AddLocition extends Component {
 
     this.setState({ [e.target.name]: URL.createObjectURL(e.target.files[0]),sendPhtoto:e.target.files[0] });
   };
+  async componentDidMount() {
+    fetch(`${process.env.REACT_APP_URL_API}/v1/location/provinces/`).then(resp=>resp.json()).then(resps=>{
+      this.setState({states:resps})
+    })
+ 
+  }
   changeValueFileW= (e) =>{
     this.setState({ [e.target.name]: URL.createObjectURL(e.target.files[0]),sendPhtotoW:e.target.files[0] });
 
@@ -184,10 +190,13 @@ class AddLocition extends Component {
                       استان :
                     </LableInputForm>
                     <SelectBox name="state" id="state" onChange={this.changeValue} >
-                      {this.props.states.map((item, index) => {
+                    <OptionSelect value='...' >
+                            ....
+                          </OptionSelect>  
+                    {this.state.states.map((item, index) => {
                         return (
-                          <OptionSelect value={item.provinceName} key={index}>
-                            {item.provinceName}
+                          <OptionSelect value={item.title} key={index}>
+                            {item.title}
                           </OptionSelect>
                         )
                       })}
