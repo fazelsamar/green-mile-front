@@ -7,15 +7,6 @@ import {
   CloseMenu,
   Headerdiv,
   HeaderElm,
-  IconMenuMobile,
-  IconMenuMobilePr,
-  IconSearch,
-  MobileMneu,
-  SearchBox,
-  SearchInput,
-  SearchMobile,
-  UserDiv,
-  ItemMenu,
 } from "./HeaderElements";
 import MobileMenu from "./MobileMenu/MobileMenu";
 
@@ -37,7 +28,7 @@ class Header extends Component {
         <MobileMenu  toggelMenuFun= {this.toggelMenuFun} toggel = {this.state.toggelMenu} />
 
         
-        <NormalHeader hasLogin={this.props.hasLogin} clickMenu ={this.toggelMenuFun} username={this.state.username} />
+        <NormalHeader clickMenu ={this.toggelMenuFun} username={this.state.username} />
         </HeaderElm>
 
     );

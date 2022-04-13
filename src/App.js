@@ -10,7 +10,9 @@ import Posts from "./Pages/Posts";
 import Register from "./Pages/register";
 
 class App extends Component {
-  componentDidMount() {
+  async componentDidMount(state) {
+
+
     if (localStorage.getItem("token")) {
       this.setState({ login: true });
     }
@@ -18,6 +20,7 @@ class App extends Component {
 
   state = {
     login: true,
+    post: '',
     states: [
       {
         provinceName: "اردبيل",
@@ -145,56 +148,25 @@ class App extends Component {
       },
     ],
 
-    posts: [
-      {
-        id: 1,
-        caption: "مکان زیبا برای مسافرت",
-        title: "شهر میبد",
-        sleep: false,
-        state: "یزد",
-        typeOfArea: "جنگل",
-        addres: "میبد",
-        locition: "12,44",
-        welfareAmenities: [
-          { name: "هتل", img: "" },
-          { name: "پمپ بنزین", img: "" },
-        ],
-        like: 23,
-        commnets: [
-          { user: "مهرداد خندان", commnet: "بسیار عالی" },
-          { user: "فاضل", commnet: "مکان زیبایی بود" },
-        ],
-      },
-      {
-        id: 1,
-        caption: "مکان زیبا برای مسافرت",
-        title: "شهر میبد",
-        sleep: false,
-        state: "یزد",
-        typeOfArea: "جنگل",
-        addres: "میبد",
-        locition: "12,44",
-        welfareAmenities: [
-          { name: "هتل", img: "" },
-          { name: "پمپ بنزین", img: "" },
-        ],
-        like: 23,
-        commnets: [
-          { user: "مهرداد خندان", commnet: "بسیار عالی" },
-          { user: "فاضل", commnet: "مکان زیبایی بود" },
-        ],
-      },
-    ],
+    posts: []
   };
+  setPosts = async (state) => {
+    await fetch(`${process.env.REACT_APP_URL_API}/v1/posts/?province__title=${state}`).then(resp => {
+      return resp.json()
+    }).then(resps => {
+      this.setState({ posts: resps })
+    })
+  }
+
   render() {
     return (
       <Router>
-        <Layout hasLogin={this.state.login}>
+        <Layout >
           <Routes>
             <Route path="/" element={<Home states={this.state.states} />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/post" element={<Post post={this.state.posts[0]} />} />
-            <Route path="/posts" element={<Posts posts={this.state.posts} />} />
+            <Route path="/post/:state/:id" element={<Post getPost={this.setPost} post={this.state.post} />} />
+            <Route path="/posts/:name" element={<Posts setPosts={this.setPosts} posts={this.state.posts} />} />
             <Route path="/register" element={<Register />} />
             <Route
               path="/addlocition"

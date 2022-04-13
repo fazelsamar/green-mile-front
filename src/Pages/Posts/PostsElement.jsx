@@ -5,6 +5,7 @@ export const ParentElement = styled.div
     width: 100%;
     margin: auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content:space-between;
 
     @media screen and (max-width:500px) {

@@ -9,7 +9,7 @@ class Layout extends Component {
     console.log(this.props.hasLogin);
     return (
       <HtmlTag>
-        <Header hasLogin= {this.props.hasLogin} />
+        <Header  />
 
         <Body>{this.props.children}</Body>
 

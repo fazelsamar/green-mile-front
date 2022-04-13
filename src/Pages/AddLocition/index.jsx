@@ -42,9 +42,9 @@ import Input from "./Inputs/Input";
 
 
 const stateone = {
-  openPageAdd: false,
-  openPageAddMap: false,
+  sendPhtoto:'',
   photoW: '',
+  sendPhtotoW:'',
   titleW: '',
   photo: "",
   title: '',
@@ -55,14 +55,20 @@ const stateone = {
   locition: '',
   welfareAmenities: [],
   sleep: false,
-  infoAddMap :{}
+  infoAddMap: {}
+
 };
 class AddLocition extends Component {
   state = stateone
   changeValueFile = (e) => {
+    console.log(e.target.files[0])
 
-    this.setState({ [e.target.name]: URL.createObjectURL(e.target.files[0]) });
+    this.setState({ [e.target.name]: URL.createObjectURL(e.target.files[0]),sendPhtoto:e.target.files[0] });
   };
+  changeValueFileW= (e) =>{
+    this.setState({ [e.target.name]: URL.createObjectURL(e.target.files[0]),sendPhtotoW:e.target.files[0] });
+
+  }
   changeValue = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -73,9 +79,9 @@ class AddLocition extends Component {
     const image = this.state.photoW
     const titleW = this.state.titleW
     const copyState = [...this.state.welfareAmenities]
-    const create = { title: titleW, img: image }
+    const create = { title: titleW, img: image,sendPhtotoW:this.state.sendPhtotoW}
     copyState.push(create)
-    this.setState({ openPageAdd: false, welfareAmenities: copyState, titleW: '', photoW: '' })
+    this.setState({ openPageAdd: false, welfareAmenities: copyState, titleW: '', photoW: '',sendPhtotoW:'' })
   }
   HandelPage = () => {
     const check = this.state.openPageAdd
@@ -84,9 +90,48 @@ class AddLocition extends Component {
   closePage = () => {
     this.setState({ openPageAdd: false })
   }
-  formHandel = (e) => {
+   formHandel = async (e) => {
     e.preventDefault()
+    let formData = new FormData()
+    formData.append('title',this.state.title)
+    formData.append('image',this.state.sendPhtoto)
+    formData.append('description',this.state.caption)
+    formData.append('postal_address',this.state.infoAddMap.addres.address)
+    formData.append('province',this.state.state)
+    formData.append('location',`${this.state.infoAddMap.lon},${this.state.infoAddMap.lat}`)
+    formData.append('location_kind',this.state.typeOfArea)
+    formData.append('rest_place',this.state.sleep)
+    let idPost ;
+    
+   await fetch(`${process.env.REACT_APP_URL_API}/v1/post/new/`, {
+      method:'post',
+      headers: {
+        Authorization: `Token ${localStorage.getItem('token')}`
+      },
+      body:formData
+    }).then(  resp=>  resp.json()).then( respe=>{
+      console.log(respe)
+       idPost = respe.id
+    })
+    
+     this.state.welfareAmenities.map(async item=>{
+     let newForm = new FormData()
+      console.log(item);
+     newForm.append('image',item.sendPhtotoW)
+     newForm.append('title',item.title)
+      await fetch(`${process.env.REACT_APP_URL_API}/v1/post/${idPost}/new-welfare-place/`,{
+        method:'post',
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`
+        },
+        body:newForm
+      }).then(resp=>{resp.json()}).then(res=>{
+        console.log(res)
+      })
+    })
+
     this.setState(stateone)
+
     alert('با موفقیت انجام شد')
   }
   handelAddMapPage = () => {
@@ -94,7 +139,7 @@ class AddLocition extends Component {
   }
   setMap = (info) => {
 
-    this.setState({infoAddMap:info ,openPageAddMap:false})
+    this.setState({ infoAddMap: info, openPageAddMap: false })
 
   }
   render() {
@@ -176,9 +221,9 @@ class AddLocition extends Component {
                     <LableInputForm>
                       اضافه کردن نقشه
                     </LableInputForm>
-                    
+
                     <AddMap onClick={this.handelAddMapPage}> اضافه کردن </AddMap>
-                    <ShowAddres>  {this.state.infoAddMap.addres ? 'ادرس : ' + this.state.infoAddMap.addres.address :null} </ShowAddres>
+                    <ShowAddres>  {this.state.infoAddMap.addres ? 'ادرس : ' + this.state.infoAddMap.addres.address : null} </ShowAddres>
                   </FormItem>
 
                   <FormItem>
@@ -219,7 +264,7 @@ class AddLocition extends Component {
                     <DivInput>
                       <DivLable htmlFor="welfareAmenities">
                         <InputFile
-                          onChange={this.changeValueFile}
+                          onChange={this.changeValueFileW}
                           accept="image/*"
                           id="photoW"
                           name="photoW"

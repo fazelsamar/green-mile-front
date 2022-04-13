@@ -26,9 +26,9 @@ const Login = () => {
       body: formData,
     })
       .then((response) => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           alert("ورود موفقیت آمیز بود");
-          // navigate("/login");
+          navigate("/");
           return response.json();
         }
         if (response.status == 401) {

@@ -9,9 +9,9 @@ class NormalHeader extends Component {
       
         return (
             <Headerdiv>
-                {this.props.hasLogin?<UserDiv>
+                {localStorage.getItem("token") ?<UserDiv>
                     <Profile />
-                    <BtnLinkHeader to="">{this.props.username}</BtnLinkHeader>
+                    <BtnLinkHeader to="">{localStorage.getItem("last_name")}</BtnLinkHeader>
                   </UserDiv> : <UserLoginDiv to='/login' >
                     ورود
                   </UserLoginDiv> }

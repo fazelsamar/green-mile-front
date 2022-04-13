@@ -25,11 +25,11 @@ const Register = () => {
       method: "POST",
       body: formData,
     }).then((response) => {
-      if (response.status == 201) {
+      if (response.status === 201) {
         alert("ثبت نام موفقیت آمیز بود");
         navigate("/login");
       }
-      if (response.status == 400) {
+      if (response.status === 400) {
         alert("یوزری با این نام کاربری از قبل وجود دارد");
       }
     });

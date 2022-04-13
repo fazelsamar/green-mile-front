@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { DivItemInfo, DivPostImg, ItemQ, ItemR, LinkPostDiv, LinkPost, ParentDivPost, PostImg, PostInfo, PostInfoMore, PostTitle } from './PostElement';
-import img from './../../images/189967449-talab-ir.jpg'
+const url = 'http://127.0.0.1:8000'
 
 
 
@@ -11,7 +11,7 @@ class Post extends Component {
         return (
             <ParentDivPost>
                 <DivPostImg>
-                    <PostImg src={img} />
+                    <PostImg src={`${url}${localStorage.getItem("profile_pic")}`} />
                 </DivPostImg>
                 <PostInfo>
                     <PostTitle>
@@ -19,19 +19,16 @@ class Post extends Component {
                     </PostTitle>
 
                     <PostInfoMore>
-                        <DivItemInfo>
-                            <ItemQ> ادرس  : </ItemQ>
-                            <ItemR>  {post.addres} </ItemR>
-                        </DivItemInfo>
+
                         <DivItemInfo>
                             <ItemQ> نوع منطقه :  </ItemQ>
-                            <ItemR>  {post.typeOfArea} </ItemR>
+                            <ItemR>  {post.location_kind} </ItemR>
                         </DivItemInfo>
                         <DivItemInfo>
                             <ItemQ> استان:  </ItemQ>
-                            <ItemR>  {post.state} </ItemR>
+                            <ItemR>  {post.province} </ItemR>
                         </DivItemInfo>
-                        <LinkPostDiv > <LinkPost to='/post' > بیشتر </LinkPost></LinkPostDiv>
+                        <LinkPostDiv > <LinkPost postInfo={post} to={`/post/${post.province}/${post.id}`} > بیشتر </LinkPost></LinkPostDiv>
                     </PostInfoMore>
                 </PostInfo>
 

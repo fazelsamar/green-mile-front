@@ -126,6 +126,10 @@ export const DivWelfareItemImg = styled.div`
   align-items: center;
   justify-content: center;
 `;
+export const ImgWelf = styled.img`
+  width: 100%;
+  height: 100%;
+`
 export const DivWelfareItemTitle = styled.p`
   font-weight: bold;
 `;
@@ -150,6 +154,7 @@ export const MapElement = styled.div`
   background-color: gray;
   display: flex;
   align-items: center;
+  overflow: hidden;
   border-radius: 3px;
   justify-content: center;
   width: 100%;
