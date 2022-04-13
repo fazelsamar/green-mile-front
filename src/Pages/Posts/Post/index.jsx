@@ -57,9 +57,6 @@ const Post= (props)=> {
         await fetch(`${process.env.REACT_APP_URL_API}/v1/posts/?province__title=${state.state}`).then(resp => {
             return resp.json()
         }).then(resps => {
-            console.log(resps);
-            console.log(state.id)
-            console.log(resps)
             goPost = resps.filter(item => {
                 return item.id === Number(state.id)
             })
@@ -72,26 +69,30 @@ const Post= (props)=> {
     }
     setPosta()
     }, []);
-    const formHandel = (e)=>{
-      let commnet = {}
-      commnet.body = valueCommnet
-      commnet.full_name=localStorage.getItem('first_name') + '' + localStorage.getItem('first_name')  
-      commnet.profile_pic =  localStorage.getItem('profile_pic')
-      let copyPost = post
-      copyPost.comments.push(commnet)
-      setPost(copyPost)
+    const formHandel = async (e)=>{
+     
       e.preventDefault()
       let newForm=  new FormData()
       newForm.append('body',valueCommnet)
       
-      fetch(`${process.env.REACT_APP_URL_API}/v1/post/${post.id}/new-comment/`,{
+      await fetch(`${process.env.REACT_APP_URL_API}/v1/post/${post.id}/new-comment/`,{
         method:'post',
         headers:{
           Authorization: `Token ${localStorage.getItem('token')}`
         },
         body:newForm
       }).then(resp=>{
-        console.log(resp)
+        let commnet = {}
+      commnet.body = valueCommnet
+      commnet.full_name=localStorage.getItem('first_name') + '' + localStorage.getItem('first_name')  
+      commnet.profile_pic =  localStorage.getItem('profile_pic')
+      let copyPost = post
+      copyPost.comments.push(commnet)
+      setPost(copyPost)
+      setValueCommnet('')
+      console.log(resp);
+      window.location.replace("/");
+
       })
     }
     return (
