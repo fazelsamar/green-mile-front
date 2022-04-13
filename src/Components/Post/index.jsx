@@ -11,7 +11,7 @@ class Post extends Component {
         return (
             <ParentDivPost>
                 <DivPostImg>
-                    <PostImg src={`${url}${localStorage.getItem("profile_pic")}`} />
+                    <PostImg src={`${post.image}`} />
                 </DivPostImg>
                 <PostInfo>
                     <PostTitle>

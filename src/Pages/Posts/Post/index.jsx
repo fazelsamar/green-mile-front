@@ -93,8 +93,7 @@ const Post= (props)=> {
       setPost(copyPost)
       setValueCommnet('')
       console.log(resp);
-      setNav(true )
-
+        window.location.replace(`/post/${post.id}`)
       })
     }else{
       alert('لطفا وارد حساب کاربری خود شوید')
@@ -129,7 +128,7 @@ const Post= (props)=> {
     }
     return (
       <>
-      {hasNav  ?<Navigate replace to={`/`} />  :
+      {
         <>
       {post ? 
       <ParentPost>
