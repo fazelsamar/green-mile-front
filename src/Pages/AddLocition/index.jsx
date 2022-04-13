@@ -189,8 +189,8 @@ class AddLocition extends Component {
                     <LableInputForm htmlfor='state'>
                       استان :
                     </LableInputForm>
-                    <SelectBox name="state" id="state" onChange={this.changeValue} >
-                    <OptionSelect value='...' >
+                    <SelectBox required name="state" id="state" onChange={this.changeValue} >
+                    <OptionSelect selected disabled hidden >
                             ....
                           </OptionSelect>  
                     {this.state.states.map((item, index) => {
