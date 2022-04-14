@@ -55,7 +55,7 @@ export const InputSubmit = styled.input`
     }
 `
 
-export const Register = styled(Link)`
+export const RegisterLink = styled(Link)`
 
     text-decoration: none;
     

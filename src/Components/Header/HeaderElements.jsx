@@ -156,7 +156,7 @@ export const SearchMobile = styled.div`
   justify-content: center;
   width: 80%;
   margin: auto;
-  padding: 3px 3px;
+  padding: 3px 0;
   margin-top: 10px;
   height: 28px;
   align-items: center;
@@ -189,3 +189,11 @@ export const ItemMenu = styled(Link)`
   }
 `;
 
+export const  DivIconSearch = styled.div`
+     width: 15%;
+    justify-content: center;
+    display: flex;
+    background: gray;
+    align-items: center;
+    padding: 8px 4px;
+`

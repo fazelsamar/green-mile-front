@@ -11,6 +11,7 @@ import {
   LableForm,
   Submit,
 } from "../register/RegisterElement";
+import { RegisterLink } from "./LoginElem";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -85,6 +86,8 @@ const Login = () => {
           <DivFormInput>
             <Submit type="submit" value="ورود" />
           </DivFormInput>
+          <p>ثبت نام نکرده اید؟ </p>
+          <p><RegisterLink to ='/register'> ثبت نام کنید </RegisterLink> </p>
         </FormRegister>
       </DivFormRegister>
     </DivParentRegister>
