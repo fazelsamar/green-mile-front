@@ -22,10 +22,10 @@ class MobileMenu extends Component {
               </DivIconSearch>
             </SearchMobile> 
             <BoxItemMenus>
-              <ItemMenu to=""> اضافه کردن مکان </ItemMenu>
+              <ItemMenu to="/addlocition"> اضافه کردن مکان </ItemMenu>
             </BoxItemMenus>
             <BoxItemMenus>
-              <ItemMenu to=""> لیست استان ها </ItemMenu>
+              <ItemMenu to="/"> لیست استان ها </ItemMenu>
             </BoxItemMenus>
             
           </MobileMneu>

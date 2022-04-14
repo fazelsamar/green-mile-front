@@ -158,7 +158,7 @@ export const PageAddLocition = styled.div`
     right    :25% ;
     border-radius: 3px;
     transition: all 1s ease;
-    top: ${({ open }) => (open ? '100px' : '-100')};
+    top: ${({ open }) => (open ? '100px' : '-100%')};
     opacity: ${({ open }) => (open ? '1' : '0')};
     z-index: 10;
     height: 350px;
@@ -168,7 +168,9 @@ export const PageAddLocition = styled.div`
     width: 50%;
     background-color: #fff;
     @media screen and (max-width: 500px) {
-        top:0;
+        
+        top: ${({ open }) => (open ? '0' : '-100%')};
+
         right: 0;
         width: 100%; 
         height: 100%;
@@ -298,12 +300,16 @@ export const PageAddMap = styled.div`
     padding: 10px ;
     transition: all 0.5s ease;
     top: ${({hasOpen})=>(hasOpen ? '100px': '-100%')};
+    top: ${({hasOpen})=>(hasOpen ? '100px': '-100%')};
     opacity: ${({hasOpen})=>(hasOpen ? '1': '0')};
     z-index: 50;
     right: 25%;
     background-color:#fff;
 
-
+@media screen and (max-width:500px){
+    display: ${({hasOpen})=>(hasOpen ? 'block': 'none')};
+    
+}
 `
 export const ShowAddres = styled.div`
 

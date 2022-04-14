@@ -46,7 +46,7 @@ export const InputSubmit = styled.input`
     
     min-height:30px ;
     margin: 5px 0;
-    transition: all 0.5s ease;
+    transition: all 0.4s ease;
     &:hover {
     background-color: #fff;
     color: #02AB8A;
